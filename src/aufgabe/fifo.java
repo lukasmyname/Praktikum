@@ -83,6 +83,31 @@ public class fifo {
 		}
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + count;
+		result = prime * result + Arrays.hashCode(tFIFO);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		fifo other = (fifo) obj;
+		if (count != other.count)
+			return false;
+		if (!Arrays.equals(tFIFO, other.tFIFO))
+			return false;
+		return true;
+	}
+
 	public int pull(){
 		int pull =0;
 		if (this.getCount() > 0){
@@ -100,19 +125,12 @@ public class fifo {
 		return pull;
 	}
 	
-	public String toString(){
-		return ("FIFO:" + Arrays.toString(this.gettFIFO()));
-		//return ("FIFO:" + this.tFIFO[0] + this.tFIFO[1] + this.tFIFO[2] + this.tFIFO[3] + this.tFIFO[4]);
+	@Override
+	public String toString() {
+		return "fifo [tFIFO=" + Arrays.toString(tFIFO) + ", count=" + count + "]";
 	}
 	
-	public boolean equals(fifo param){
-		if (this.tFIFO.equals(param.tFIFO)&&this.count==param.count){
-			return true;
-		}
-		else{
-			return false;
-		}
-	}
+	
 	
 	public fifo clone(){
 		return new fifo(this.tFIFO, this.count);
